@@ -95,8 +95,8 @@ plt.show()
 
 
 
-
-img = testx[100]
+testx = testx.reshape([-1,32,32,1])
+img = testx[50]
 
 print(img.shape)
 
@@ -132,6 +132,6 @@ print(catego[i])
 
 # Evaluate the model on the test data using `evaluate`
 print("Evaluate on test data")
-results = model.evaluate(testx, testy, batch_size=128)
+results = recognizer.evaluate(testx, testy, batch_size=128)
 print("test loss, test acc:", results)
 
