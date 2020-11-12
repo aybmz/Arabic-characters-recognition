@@ -1,1 +1,2 @@
-# arabic-characters-recognition
+
+#Arabic handwritten characters recognition
