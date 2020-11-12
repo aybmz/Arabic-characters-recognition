@@ -106,7 +106,7 @@ print(img.shape)
 
 
 #predcting Model
-predictions_single = model.predict(img)
+predictions_single = recognizer.predict(img)
 
 print(predictions_single)
 
