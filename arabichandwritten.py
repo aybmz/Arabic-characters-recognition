@@ -1,9 +1,4 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
+#importing libraries
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras 
@@ -13,8 +8,8 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPool2D
 
 
-# In[ ]:
 
+#loading data
 
 trainx = pd.read_csv('../input/ahcd1/csvTrainImages 13440x1024.csv', header = None)
 trainy = pd.read_csv('../input/ahcd1/csvTrainLabel 13440x1.csv', header = None)
@@ -22,7 +17,7 @@ testx = pd.read_csv('../input/ahcd1/csvTestImages 3360x1024.csv', header = None)
 testy = pd.read_csv('../input/ahcd1/csvTestLabel 3360x1.csv', header = None)
 
 
-# In[ ]:
+
 
 
 trainx = trainx.values.astype('float32')
@@ -35,44 +30,20 @@ testx = testx.values.astype('float32')
 testy = testy.values.astype('int32')-1
 
 
-# In[ ]:
-
-
-trainx[0]
-
-
-# In[ ]:
-
 
 trainy = keras.utils.to_categorical(trainy,28)
 
-
-# In[ ]:
-
-
 print(trainy.shape)
-
-
-# In[ ]:
-
 
 testy = keras.utils.to_categorical(testy,28)
 
-
-# In[ ]:
-
-
+#reshaping 
 trainx = trainx.reshape([-1, 32, 32,1])
 testx = testx.reshape([-1, 32, 32,1])
-
-
-# In[ ]:
-
 
 print(trainx.shape, trainy.shape, testx.shape, testy.shape)
 
 
-# In[ ]:
 
 
 #Normalising data
@@ -81,9 +52,9 @@ testx /=255.0
 trainx.shape
 
 
-# In[ ]:
 
 
+#model CNN
 recognizer = Sequential()
 
 recognizer.add(Conv2D(filters = 32, kernel_size = (5,5),padding = 'Same', 
@@ -96,7 +67,6 @@ recognizer.add(Flatten())
 recognizer.add(Dense(28, activation = "softmax"))
 
 
-# In[ ]:
 
 
 recognizer.compile(optimizer='adam',
@@ -104,17 +74,17 @@ recognizer.compile(optimizer='adam',
               metrics=['accuracy'])
 
 
-# In[ ]:
+
 
 
 recognizer.fit(trainx, trainy,batch_size=100, epochs=50,validation_data=(testx,testy))
 
 
-# In[ ]:
 
 
-#plotting 
-testx = testx.reshape([-1, 32, 32])
+
+#visualising data
+testx = testx.reshape([-1, 32, 32]) # reshaping  (2D array)
 testx.shape
 plt.figure()
 plt.imshow(testx[50].T)
@@ -123,10 +93,9 @@ plt.grid(False)
 plt.show()
 
 
-# In[ ]:
 
 
-#predcting Model
+
 img = testx[100]
 
 print(img.shape)
@@ -136,33 +105,29 @@ img = (np.expand_dims(img,0))
 print(img.shape)
 
 
-# In[ ]:
-
-
+#predcting Model
 predictions_single = model.predict(img)
 
 print(predictions_single)
 
 
-# In[ ]:
+
 
 
 i=np.argmax(predictions_single[0])
 
 
-# In[ ]:
+
 
 
 catego = ["alif","ba2","ta2","thaa","jim","7a2","kha2","dal","dhal","ra2","zay","sin","shin","saad","daad","ta2on","zaa","3ayn","ghayn","faa","qaaf","kaf","lam","mim","noon","haa","waw","yaa"]
 
 
-# In[ ]:
 
 
 print(catego[i])
 
 
-# In[ ]:
 
 
 # Evaluate the model on the test data using `evaluate`
