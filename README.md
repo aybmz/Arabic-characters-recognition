@@ -1,2 +1,1 @@
-
 #Arabic handwritten characters recognition
