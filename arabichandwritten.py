@@ -106,7 +106,6 @@ print(img.shape)
 
 
 #predcting Model
-#ayoub
 predictions_single = recognizer.predict(img)
 
 print(predictions_single)
