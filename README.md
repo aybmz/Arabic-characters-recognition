@@ -1,4 +1,4 @@
-# Arabic handwritten characters recognition 
+# Arabic handwritten characters recognition ✏️
 ## Description 
 Handwritten Arabic character recognition systems face several challenges, including the unlimited variation in human handwriting and large public databases
 ## Dataset
